@@ -1,0 +1,41 @@
+@charset "UTF-8";
+
+@import "../reindeer/legacy-styles.css";
+@import "../reindeer/styles.css";
+@import "../themes/mytheme/styles.css"
+
+.blueBackground {
+	background-color: blue;
+}
+
+.specialFont {
+	color: #000;
+	letter-spacing: 4px;
+	font-family: "Segoe UI",Arial,sans-serif;
+	font-size: 15px;
+	line-height: 1.5;
+	font-weight: 400;
+}
+
+.blaFont{
+	letter-spacing: 4px;
+	background-color: green;
+}
+
+.testImg {
+	background-image: url("themes/mytheme/img/Cart.PNG") !important;
+	border: none !important;
+}
+
+.testImg:hover {
+	background-image: url("themes/mytheme/img/Cart_hover.PNG") !important;
+}
+
+.testImg:focus {
+	outline: 0 !important;
+}
+
+
+.testFont {
+	color: yellow;	
+}

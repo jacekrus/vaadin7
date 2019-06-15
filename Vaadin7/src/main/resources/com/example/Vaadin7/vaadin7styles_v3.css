@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+@import "../reindeer/legacy-styles.css";
+@import "../reindeer/styles.css";
+@import "../themes/mytheme/styles.css"
+
+.blueBackground {
+	background-color: blue;
+}
+
+.specialFont {
+	color: blue;
+	letter-spacing: 4px;
+}
+
+.blaFont{
+	letter-spacing: 4px;
+	background-color: green;
+}
+
+.testFont {
+	color: yellow;	
+}
