@@ -8,11 +8,9 @@ import com.ejt.vaadin.loginform.LoginForm.LoginListener;
 import com.example.Vaadin7.model.NavigationNames;
 import com.example.Vaadin7.service.AuthenticationService;
 import com.example.Vaadin7.service.UserService;
-import com.example.Vaadin7.view.AdminView;
-import com.example.Vaadin7.view.DefaultView;
-import com.example.Vaadin7.view.ShopView;
 import com.vaadin.annotations.Theme;
 import com.vaadin.cdi.CDIUI;
+import com.vaadin.cdi.CDIViewProvider;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.server.Page;
 import com.vaadin.server.VaadinRequest;
@@ -37,11 +35,13 @@ public class MainUI extends UI {
 	private static final long serialVersionUID = 483656132564722441L;
 	
 	@Inject
-	UserService userBean;
+	UserService userSvc;
 	
 	@Inject
 	AuthenticationService authSvc;
 	
+	@Inject
+	CDIViewProvider viewProvider;
     
 	@Override
     protected void init(VaadinRequest vaadinRequest) {
@@ -56,7 +56,11 @@ public class MainUI extends UI {
     	setSizeFull();
     	setContent(mainLayout);
     }
-
+	
+	public static boolean isSessionActive() {
+		return VaadinSession.getCurrent().getAttribute("user") != null;
+	}
+	
 	@SuppressWarnings("serial")
 	private void setUpLoginView(HorizontalLayout mainLayout) {
 		mainLayout.removeAllComponents();
@@ -67,8 +71,8 @@ public class MainUI extends UI {
 			public void onLogin(LoginEvent event) {
 				boolean login = authSvc.login(event.getUserName(), event.getPassword());
 				if(login) {
-					setUpMainView(mainLayout);
 					VaadinSession.getCurrent().setAttribute("user", event.getUserName());
+					setUpMainView(mainLayout);
 					showLoginNotification("Login successful!", Type.HUMANIZED_MESSAGE, Position.BOTTOM_CENTER);
 				}
 				else {
@@ -91,9 +95,13 @@ public class MainUI extends UI {
 		Button shopButton = new Button("Shop", e -> getNavigator().navigateTo(NavigationNames.SHOP_VIEW));
 		shopButton.setDescription("Shop");
 		shopButton.setWidth("100%");
-		Button logout = setUpLogoutButton(mainLayout);
+		Button logoutButton = setUpLogoutButton(mainLayout);
 		
-		VerticalLayout menuButtons = new VerticalLayout(adminButton, shopButton, logout);
+		VerticalLayout menuButtons = new VerticalLayout();
+		if("admin".equals(getLoggedInUsername())) {
+			menuButtons.addComponent(adminButton);
+		}
+		menuButtons.addComponents(shopButton, logoutButton);
 		menuButtons.setSpacing(true);
 		menuButtons.setMargin(true);
 		VerticalLayout menu = new VerticalLayout(title, menuButtons);
@@ -118,11 +126,8 @@ public class MainUI extends UI {
 	
 	private void setUpNavigation(Layout container) {
 		Navigator navigator = new Navigator(this, container);
-		navigator.addView(NavigationNames.ADMIN_VIEW, AdminView.class);
-		navigator.addView(NavigationNames.SHOP_VIEW, ShopView.class);
-		navigator.addView(NavigationNames.DEFAULT, DefaultView.class);
+		navigator.addProvider(viewProvider);
 		navigator.navigateTo(NavigationNames.DEFAULT);
-		getNavigator().navigateTo(NavigationNames.DEFAULT);
 	}
 	
 	private Button setUpLogoutButton(HorizontalLayout layout) {
@@ -140,8 +145,8 @@ public class MainUI extends UI {
 		return logout;
 	}
 	
-	public static boolean isSessionActive() {
-		return VaadinSession.getCurrent().getAttribute("user") != null;
+	private String getLoggedInUsername() {
+		return VaadinSession.getCurrent().getAttribute("user").toString();
 	}
-    
+	
 }

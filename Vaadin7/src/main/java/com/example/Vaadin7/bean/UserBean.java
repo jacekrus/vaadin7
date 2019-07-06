@@ -1,4 +1,4 @@
-package com.example.Vaadin7.service;
+package com.example.Vaadin7.bean;
 
 import java.util.List;
 
@@ -6,6 +6,8 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 
 import com.example.Vaadin7.model.UserEntity;
+import com.example.Vaadin7.service.DataAccessService;
+import com.example.Vaadin7.service.UserService;
 
 @RequestScoped
 public class UserBean implements UserService {
@@ -13,18 +15,14 @@ public class UserBean implements UserService {
 	@Inject
 	DataAccessService dbSvc;
 	
-	public String sayHello() {
-		return "Hello";
-	}
-	
+	@Override
 	public void addUser(UserEntity userEntity) {
 		dbSvc.persist(userEntity);
 	}
 
 	@Override
 	public List<UserEntity> findAllUsers() {
-		// TODO Auto-generated method stub
-		return null;
+		return dbSvc.findAllUsers();
 	}
 	
 }

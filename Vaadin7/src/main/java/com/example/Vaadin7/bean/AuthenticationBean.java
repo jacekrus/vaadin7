@@ -1,4 +1,4 @@
-package com.example.Vaadin7.service;
+package com.example.Vaadin7.bean;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -10,6 +10,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import com.example.Vaadin7.model.UserEntity;
+import com.example.Vaadin7.service.AuthenticationService;
 
 @Stateless
 public class AuthenticationBean implements AuthenticationService {

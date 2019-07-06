@@ -1,4 +1,4 @@
-package com.example.Vaadin7.service;
+package com.example.Vaadin7.bean;
 
 import java.util.List;
 
@@ -11,6 +11,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import com.example.Vaadin7.model.UserEntity;
+import com.example.Vaadin7.service.DataAccessService;
 
 @Stateless
 public class DataAccessBean implements DataAccessService {
