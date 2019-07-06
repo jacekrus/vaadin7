@@ -1,16 +1,13 @@
 package com.example.Vaadin7.view;
 
-import javax.swing.plaf.IconUIResource;
-
-import com.google.gwt.user.client.ui.Image;
+import com.example.Vaadin7.model.NavigationNames;
 import com.vaadin.annotations.StyleSheet;
 import com.vaadin.cdi.CDIView;
-import com.vaadin.client.ui.Icon;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.ExternalResource;
 import com.vaadin.server.ThemeResource;
-import com.vaadin.shared.ui.button.ButtonServerRpc;
+import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.Embedded;
@@ -19,11 +16,9 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.themes.ValoTheme;
 
-@CDIView("poolJavaSnookerView")
-//@StyleSheet("vaadin://vaadin7styles_v3.css")
-@StyleSheet("vaadin://vaadin7styles_v9.css")
-//@Theme("mytheme")
-public class PoolJavaSnookerView extends CustomComponent implements View {
+@CDIView(NavigationNames.SHOP_VIEW)
+@StyleSheet(NavigationNames.STYLESHEET)
+public class ShopView extends CustomComponent implements View {
 
 	private static final long serialVersionUID = -7480398079308043714L;
 
@@ -49,6 +44,8 @@ public class PoolJavaSnookerView extends CustomComponent implements View {
 		layout.addComponent(label);
 		layout.addComponent(button);
 		layout.addComponent(embedded);
+		
+		layout.setComponentAlignment(label, Alignment.MIDDLE_CENTER);
 //		layout.addLayoutClickListener(e -> Notification.show("ble"));
 		setCompositionRoot(layout);
 	}

@@ -54,7 +54,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.vaadin</groupId>
-			<artifactId>vaadin-client-compiler</artifactId>
+			<artifactId>vaadin-client-compiled</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.vaadin</groupId>

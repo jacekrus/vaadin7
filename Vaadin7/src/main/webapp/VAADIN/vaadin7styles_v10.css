@@ -12,7 +12,7 @@
 	color: #000;
 	letter-spacing: 4px;
 	font-family: "Segoe UI",Arial,sans-serif;
-	font-size: 15px;
+	font-size: 32px;
 	line-height: 1.5;
 	font-weight: 400;
 }
@@ -35,7 +35,12 @@
 	outline: 0 !important;
 }
 
-
-.testFont {
-	color: yellow;	
+.logoutButton {
+	background-image: url("themes/mytheme/img/logoutImg.png") !important;
+	border: none !important;
+	position: absolute;
+	top: 600px;
+	left: 40px;
 }
+
+

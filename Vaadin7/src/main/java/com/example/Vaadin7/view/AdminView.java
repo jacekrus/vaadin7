@@ -16,6 +16,7 @@ public class AdminView extends CustomComponent implements View {
 	public void enter(ViewChangeEvent event) {
         VerticalLayout layout = new VerticalLayout();
         layout.setSizeFull();
+        
         ProgressBar bar = new ProgressBar();
         layout.addComponent(bar);
         setSizeFull();

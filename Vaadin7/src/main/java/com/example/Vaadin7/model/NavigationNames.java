@@ -6,8 +6,10 @@ public final class NavigationNames {
 	
 	public static final String ADMIN_VIEW = "adminView";
 	
-	public static final String POOL_JAVA_SNOOKER_VIEW = "poolJavaSnookerView";
+	public static final String SHOP_VIEW = "shopView";
 	
-	public static final String WELCOME = "welcome";
+	public static final String DEFAULT = "default";
+	
+	public static final String STYLESHEET = "vaadin://vaadin7styles_v10.css";
 	
 }
