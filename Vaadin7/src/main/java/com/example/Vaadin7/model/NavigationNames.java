@@ -12,6 +12,6 @@ public final class NavigationNames {
 	
 	public static final String MAIN = "mainView";
 	
-	public static final String STYLESHEET = "vaadin://vaadin7styles_v15.css";
+	public static final String STYLESHEET = "vaadin://vaadin7styles_v16.css";
 	
 }

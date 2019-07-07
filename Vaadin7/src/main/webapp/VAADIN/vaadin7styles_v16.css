@@ -50,6 +50,10 @@
 	font-weight: bold;
 }
 
+.marginLeft {
+	margin-left: 200px;
+}
+
 .v-gridlayout-spacing-on {
 	height: 40px !important;
 	overflow: auto;

@@ -10,7 +10,6 @@ import com.example.Vaadin7.service.UserService;
 import com.vaadin.cdi.CDIView;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
-import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.Grid;
@@ -32,9 +31,10 @@ public class AdminView extends CustomComponent implements View {
 	@Override
 	public void enter(ViewChangeEvent event) {
         VerticalLayout layout = new VerticalLayout();
-        layout.setId("ADMINVIEW");
-        layout.setSizeFull();
-
+        layout.setSpacing(true);
+        layout.setMargin(true);
+        layout.addStyleName("marginLeft");
+        
         VerticalLayout gridContainer = new VerticalLayout();
         gridContainer.setSpacing(true);
         Button addUserButton = new Button("Add user");
@@ -44,8 +44,6 @@ public class AdminView extends CustomComponent implements View {
         gridContainer.addComponents(addUserButton, usersGrid);
 
         layout.addComponent(gridContainer);
-        layout.setSpacing(true);
-        layout.setMargin(true);
         
         setSizeFull();
         setCompositionRoot(layout);

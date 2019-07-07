@@ -2,10 +2,7 @@ package com.example.Vaadin7;
 
 import javax.inject.Inject;
 
-import com.example.Vaadin7.callback.LoginCallback;
-import com.example.Vaadin7.callback.LogoutCallback;
 import com.example.Vaadin7.service.AuthenticationService;
-import com.example.Vaadin7.service.UserService;
 import com.example.Vaadin7.view.LoginView;
 import com.example.Vaadin7.view.MainView;
 import com.vaadin.annotations.Theme;
@@ -22,9 +19,6 @@ import com.vaadin.ui.UI;
 public class MainUI extends UI {
 	
 	private static final long serialVersionUID = 483656132564722441L;
-	
-	@Inject
-	UserService userSvc;
 	
 	@Inject
 	AuthenticationService authSvc;

@@ -27,10 +27,11 @@ public class ShopView extends CustomComponent implements View {
 		layout.setWidth("60%");
 		layout.setSpacing(true);
 		layout.setMargin(true);
-		layout.setId("SHOPVIEW");
+		layout.addStyleName("marginLeft");
 		
 		prodSvc.findAllProducts().forEach(product -> layout.addComponent(new ProductFrame(product)));
 		
+		setSizeFull();
 		setCompositionRoot(layout);
 	}
 
