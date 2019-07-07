@@ -49,13 +49,7 @@ public class MainUI extends UI {
 	private void setUpLoginView(HorizontalLayout mainLayout) {
 		mainLayout.removeAllComponents();
 		
-		LoginView loginView = new LoginView(authSvc, new LoginCallback() {
-			
-			@Override
-			public void onLogin() {
-				setUpMainView(mainLayout);				
-			}
-		});
+		LoginView loginView = new LoginView(authSvc, () -> setUpMainView(mainLayout));
         mainLayout.addComponent(loginView);
         mainLayout.setComponentAlignment(loginView, Alignment.MIDDLE_CENTER);
 	}
@@ -63,13 +57,7 @@ public class MainUI extends UI {
 	private void setUpMainView(HorizontalLayout mainLayout) {
 		mainLayout.removeAllComponents();
 		
-		MainView mainView = new MainView(viewProvider, mainLayout, new LogoutCallback() {
-			
-			@Override
-			public void onLogout() {
-				setUpLoginView(mainLayout);
-			}
-		});
+		MainView mainView = new MainView(viewProvider, mainLayout, () -> setUpLoginView(mainLayout));
 		mainLayout.addComponent(mainView);
 	}
 	
