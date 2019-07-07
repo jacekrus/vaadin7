@@ -10,6 +10,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+import com.example.Vaadin7.model.ProductEntity;
 import com.example.Vaadin7.model.UserEntity;
 import com.example.Vaadin7.service.DataAccessService;
 
@@ -31,6 +32,16 @@ public class DataAccessBean implements DataAccessService {
 		Root<UserEntity> root = cq.from(UserEntity.class);
 		CriteriaQuery<UserEntity> query = cq.select(root);
 		TypedQuery<UserEntity> createQuery = em.createQuery(query);
+		return createQuery.getResultList();
+	}
+
+	@Override
+	public List<ProductEntity> findAllProducts() {
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<ProductEntity> cq = cb.createQuery(ProductEntity.class);
+		Root<ProductEntity> root = cq.from(ProductEntity.class);
+		CriteriaQuery<ProductEntity> query = cq.select(root);
+		TypedQuery<ProductEntity> createQuery = em.createQuery(query);
 		return createQuery.getResultList();
 	}
 

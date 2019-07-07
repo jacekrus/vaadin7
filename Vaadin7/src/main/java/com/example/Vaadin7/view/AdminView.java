@@ -32,6 +32,7 @@ public class AdminView extends CustomComponent implements View {
 	@Override
 	public void enter(ViewChangeEvent event) {
         VerticalLayout layout = new VerticalLayout();
+        layout.setId("ADMINVIEW");
         layout.setSizeFull();
 
         VerticalLayout gridContainer = new VerticalLayout();
@@ -45,7 +46,6 @@ public class AdminView extends CustomComponent implements View {
         layout.addComponent(gridContainer);
         layout.setSpacing(true);
         layout.setMargin(true);
-        layout.setComponentAlignment(gridContainer, Alignment.TOP_CENTER);
         
         setSizeFull();
         setCompositionRoot(layout);
@@ -63,13 +63,17 @@ public class AdminView extends CustomComponent implements View {
 	
 	private void showAddUserDialog(VerticalLayout layout) {
 		VerticalLayout dialogContent = new VerticalLayout();
-		PopupView dialog = new PopupView("", dialogContent);
 		dialogContent.setMargin(true);
 		dialogContent.setSpacing(true);
+
+		PopupView dialog = new PopupView("", dialogContent);
+		
 		TextField usernameField = new TextField("Username: ");
 		dialogContent.addComponent(usernameField);
+		
 		TextField passwordField = new TextField("Password: ");
 		dialogContent.addComponent(passwordField);
+		
 		Button saveButton = new Button("Save");
 		saveButton.addStyleName(ValoTheme.BUTTON_FRIENDLY);
 		saveButton.addClickListener(e -> {
