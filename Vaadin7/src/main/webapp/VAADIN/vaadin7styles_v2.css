@@ -59,3 +59,15 @@
 	overflow: auto;
 }
 
+.cartIcon {
+	background-image: url("themes/mytheme/img/shoppingCart.png") !important;
+	border: none !important;
+}
+
+.cartIcon:hover {
+}
+
+.cartIcon:focus {
+	outline: 0 !important;
+}
+

@@ -7,14 +7,14 @@ import javax.inject.Inject;
 import com.example.Vaadin7.model.NavigationNames;
 import com.example.Vaadin7.model.UserEntity;
 import com.example.Vaadin7.service.UserService;
+import com.example.Vaadin7.widget.AddUserDialog;
 import com.vaadin.cdi.CDIView;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.Grid;
-import com.vaadin.ui.PopupView;
-import com.vaadin.ui.TextField;
+import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
@@ -24,7 +24,7 @@ public class AdminView extends CustomComponent implements View {
 	private static final long serialVersionUID = 1L;
 	
 	@Inject
-	UserService userSvc;
+	private UserService userSvc;
 	
 	private List<UserEntity> users;
 
@@ -39,7 +39,7 @@ public class AdminView extends CustomComponent implements View {
         gridContainer.setSpacing(true);
         Button addUserButton = new Button("Add user");
         addUserButton.addStyleName(ValoTheme.BUTTON_FRIENDLY);
-        addUserButton.addClickListener(e -> showAddUserDialog(gridContainer));
+        addUserButton.addClickListener(e -> showAddUserDialog());
         Grid usersGrid = setUpUsersGrid();
         gridContainer.addComponents(addUserButton, usersGrid);
 
@@ -59,40 +59,10 @@ public class AdminView extends CustomComponent implements View {
 		return usersGrid;
 	}
 	
-	private void showAddUserDialog(VerticalLayout layout) {
-		VerticalLayout dialogContent = new VerticalLayout();
-		dialogContent.setMargin(true);
-		dialogContent.setSpacing(true);
-
-		PopupView dialog = new PopupView("", dialogContent);
-		
-		TextField usernameField = new TextField("Username: ");
-		dialogContent.addComponent(usernameField);
-		
-		TextField passwordField = new TextField("Password: ");
-		dialogContent.addComponent(passwordField);
-		
-		Button saveButton = new Button("Save");
-		saveButton.addStyleName(ValoTheme.BUTTON_FRIENDLY);
-		saveButton.addClickListener(e -> {
-			if(!usernameField.isEmpty() && !passwordField.isEmpty()) {
-				UserEntity newUser = new UserEntity();
-				newUser.setName(usernameField.getValue());
-				newUser.setPassword(passwordField.getValue());
-				if(!isUserAlreadyExists(usernameField.getValue())) {
-					userSvc.addUser(newUser);
-				}
-			}
-			dialog.setPopupVisible(false);
-		});
-		dialogContent.addComponent(saveButton);
-		
-		layout.addComponent(dialog);
-		dialog.setPopupVisible(true);
-	}
-	
-	private boolean isUserAlreadyExists(String username) {
-		return users.stream().anyMatch(user -> user.getName().equals(username));
+	private void showAddUserDialog() {
+		AddUserDialog addUserDialog = new AddUserDialog(userSvc, users);
+		UI.getCurrent().addWindow(addUserDialog);
+		addUserDialog.focus();
 	}
 	
 }

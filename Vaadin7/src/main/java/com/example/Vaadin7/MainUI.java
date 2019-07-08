@@ -21,10 +21,10 @@ public class MainUI extends UI {
 	private static final long serialVersionUID = 483656132564722441L;
 	
 	@Inject
-	AuthenticationService authSvc;
+	private AuthenticationService authSvc;
 	
 	@Inject
-	CDIViewProvider viewProvider;
+	private CDIViewProvider viewProvider;
     
 	@Override
     protected void init(VaadinRequest vaadinRequest) {
@@ -42,7 +42,6 @@ public class MainUI extends UI {
 	
 	private void setUpLoginView(HorizontalLayout mainLayout) {
 		mainLayout.removeAllComponents();
-		
 		LoginView loginView = new LoginView(authSvc, () -> setUpMainView(mainLayout));
         mainLayout.addComponent(loginView);
         mainLayout.setComponentAlignment(loginView, Alignment.MIDDLE_CENTER);
@@ -50,7 +49,6 @@ public class MainUI extends UI {
 	
 	private void setUpMainView(HorizontalLayout mainLayout) {
 		mainLayout.removeAllComponents();
-		
 		MainView mainView = new MainView(viewProvider, mainLayout, () -> setUpLoginView(mainLayout));
 		mainLayout.addComponent(mainView);
 	}
