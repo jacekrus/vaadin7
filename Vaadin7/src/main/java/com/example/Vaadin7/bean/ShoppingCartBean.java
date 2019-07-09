@@ -35,7 +35,7 @@ public class ShoppingCartBean implements ShoppingCartService, Serializable {
 			productsInCart.put(product.getName(), 1L);
 		}
 		else {
-			productsInCart.put(product.getName(), (productsInCart.get(product.getName()) - 1));
+			productsInCart.put(product.getName(), (productsInCart.get(product.getName()) + 1));
 		}
 	}
 
