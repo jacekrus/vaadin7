@@ -1,6 +1,6 @@
 package com.example.Vaadin7.view;
 
-import com.example.Vaadin7.model.NavigationNames;
+import com.example.Vaadin7.utils.NavigationNames;
 import com.vaadin.annotations.StyleSheet;
 import com.vaadin.cdi.CDIView;
 import com.vaadin.navigator.View;

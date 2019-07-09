@@ -1,6 +1,7 @@
 package com.example.Vaadin7.widget;
 
 import com.example.Vaadin7.model.ProductEntity;
+import com.example.Vaadin7.service.ShoppingCartService;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Embedded;
@@ -11,7 +12,10 @@ public class ProductFrame extends VerticalLayout {
 
 	private static final long serialVersionUID = 7255583790582103624L;
 	
-	public ProductFrame(ProductEntity product) {
+	private ProductEntity product;
+	
+	public ProductFrame(ProductEntity product, ShoppingCartService cartSvc) {
+		this.product = product;
 		this.setSpacing(true);
 		this.setWidth("136px");
 		this.addStyleName("productFrame");
@@ -23,6 +27,7 @@ public class ProductFrame extends VerticalLayout {
 		cartButton.addStyleName("cartImg");
 		cartButton.setWidth("132px");
 		cartButton.setHeight("37px");
+		cartButton.addClickListener(e -> cartSvc.addProductToCart(product));
 		
 		Label productName = new Label(product.getName());
 		productName.addStyleName("fontBold");
@@ -32,4 +37,8 @@ public class ProductFrame extends VerticalLayout {
 		this.addComponents(productImg, nameAndPriceContainer, cartButton);
 	}
 
+	public ProductEntity getProduct() {
+		return product;
+	}
+	
 }

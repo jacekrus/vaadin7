@@ -4,9 +4,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import com.example.Vaadin7.model.NavigationNames;
 import com.example.Vaadin7.model.UserEntity;
 import com.example.Vaadin7.service.UserService;
+import com.example.Vaadin7.utils.NavigationNames;
 import com.example.Vaadin7.widget.AddUserDialog;
 import com.vaadin.cdi.CDIView;
 import com.vaadin.navigator.View;

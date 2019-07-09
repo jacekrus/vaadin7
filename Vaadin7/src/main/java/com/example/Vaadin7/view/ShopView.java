@@ -1,9 +1,13 @@
 package com.example.Vaadin7.view;
 
+import java.util.Map;
+
 import javax.inject.Inject;
 
-import com.example.Vaadin7.model.NavigationNames;
 import com.example.Vaadin7.service.ProductService;
+import com.example.Vaadin7.service.ShoppingCartService;
+import com.example.Vaadin7.utils.NavigationNames;
+import com.example.Vaadin7.widget.CartItem;
 import com.example.Vaadin7.widget.ProductFrame;
 import com.vaadin.annotations.StyleSheet;
 import com.vaadin.cdi.CDIView;
@@ -13,7 +17,6 @@ import com.vaadin.ui.AbsoluteLayout;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.GridLayout;
-import com.vaadin.ui.Label;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
@@ -26,6 +29,9 @@ public class ShopView extends CustomComponent implements View {
 	
 	@Inject
 	private ProductService prodSvc;
+	
+	@Inject
+	private ShoppingCartService cartSvc;
 
 	@Override
 	public void enter(ViewChangeEvent event) {
@@ -39,7 +45,7 @@ public class ShopView extends CustomComponent implements View {
 		
 		Button cartButton = setUpShoppingCartButton();
 		
-		prodSvc.findAllProducts().forEach(product -> productsGrid.addComponent(new ProductFrame(product)));
+		prodSvc.findAllProducts().forEach(product -> productsGrid.addComponent(new ProductFrame(product, cartSvc)));
 		
 		layout.addComponent(productsGrid, "left: 150px; top: 50px");
 		layout.addComponent(cartButton, "right: 20px; top: 20px");
@@ -58,12 +64,16 @@ public class ShopView extends CustomComponent implements View {
 	}
 	
 	private void showCartContent() {
-		VerticalLayout dialogContent = new VerticalLayout();
-		dialogContent.setMargin(true);
-		dialogContent.setSpacing(true);
-		dialogContent.addComponent(new Label("TEST"));
+		Map<String, Long> productsInCart = cartSvc.getProductsInCart();
 		
-		Window cartDialog = new Window();
+		//Refactor to GridLayout
+		VerticalLayout dialogContent = new VerticalLayout();
+		dialogContent.setSpacing(true);
+		dialogContent.setWidth("100%");
+		productsInCart.keySet().forEach(productName -> dialogContent.addComponent(new CartItem(productName, productsInCart.get(productName), cartSvc)));
+		
+		Window cartDialog = new Window("Your cart's content ");
+		cartDialog.setWidth("250px");
 		cartDialog.setContent(dialogContent);
 		cartDialog.center();
 		cartDialog.setResizable(false);

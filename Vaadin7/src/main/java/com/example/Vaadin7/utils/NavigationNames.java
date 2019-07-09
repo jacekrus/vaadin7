@@ -1,4 +1,4 @@
-package com.example.Vaadin7.model;
+package com.example.Vaadin7.utils;
 
 public final class NavigationNames {
 	

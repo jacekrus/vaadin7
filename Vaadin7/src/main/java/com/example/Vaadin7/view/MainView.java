@@ -1,7 +1,7 @@
 package com.example.Vaadin7.view;
 
 import com.example.Vaadin7.callback.LogoutCallback;
-import com.example.Vaadin7.model.NavigationNames;
+import com.example.Vaadin7.utils.NavigationNames;
 import com.vaadin.cdi.CDIViewProvider;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.server.Page;
@@ -31,10 +31,6 @@ public class MainView extends CustomComponent {
 		this.parentLayout = parentLayout;
 		this.logoutCallback = logoutCallback;
 		init();
-	}
-	
-	public void setParentLayout(HorizontalLayout parentLayout) {
-		this.parentLayout = parentLayout;
 	}
 
 	private void init() {
