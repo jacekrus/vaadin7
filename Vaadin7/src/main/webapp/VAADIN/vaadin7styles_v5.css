@@ -64,10 +64,21 @@
 	border: none !important;
 }
 
-.cartIcon:hover {
-}
-
 .cartIcon:focus {
 	outline: 0 !important;
+}
+
+.minWidth {
+	min-width: 250px;
+}
+
+.v-button-primary {
+	min-width: 10px !important;
+}
+
+.cartItem {
+	margin-top: 10px;
+	margin-left: 15px;
+	margin-bottom: 15px;
 }
 

@@ -51,11 +51,22 @@ public class ShoppingCartBean implements ShoppingCartService, Serializable {
 
 				@Override
 				public Void visitSingle() {
-					productsInCart.put(productName, (productsInCart.get(productName) - 1));
+					Long newCount = productsInCart.get(productName) - 1;
+					if(newCount > 0) {
+						productsInCart.put(productName, newCount);
+					}
+					else {
+						productsInCart.remove(productName);
+					}
 					return null;
 				}
 			});
 		}
+	}
+
+	@Override
+	public boolean isEmpty() {
+		return productsInCart.isEmpty();
 	}
 	
 }

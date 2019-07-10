@@ -17,6 +17,7 @@ import com.vaadin.ui.AbsoluteLayout;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.GridLayout;
+import com.vaadin.ui.Label;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
@@ -66,14 +67,25 @@ public class ShopView extends CustomComponent implements View {
 	private void showCartContent() {
 		Map<String, Long> productsInCart = cartSvc.getProductsInCart();
 		
-		//Refactor to GridLayout
 		VerticalLayout dialogContent = new VerticalLayout();
 		dialogContent.setSpacing(true);
 		dialogContent.setWidth("100%");
-		productsInCart.keySet().forEach(productName -> dialogContent.addComponent(new CartItem(productName, productsInCart.get(productName), cartSvc)));
+		
+		Label emptyCart = new Label("Cart is empty");
+		emptyCart.addStyleName("fontBold");
+		emptyCart.addStyleName("cartItem");
+		emptyCart.setVisible(false);
+		dialogContent.addComponent(emptyCart);
+		
+		if(productsInCart.isEmpty()) {
+			emptyCart.setVisible(true);
+		}
+		else {
+			productsInCart.keySet().forEach(productName -> dialogContent.addComponent(new CartItem(productName, productsInCart.get(productName), cartSvc, () -> emptyCart.setVisible(true))));
+		}
 		
 		Window cartDialog = new Window("Your cart's content ");
-		cartDialog.setWidth("250px");
+		cartDialog.setWidth("330px");
 		cartDialog.setContent(dialogContent);
 		cartDialog.center();
 		cartDialog.setResizable(false);
@@ -82,5 +94,5 @@ public class ShopView extends CustomComponent implements View {
 		UI.getCurrent().addWindow(cartDialog);
 		cartDialog.focus();
 	}
-
+	
 }

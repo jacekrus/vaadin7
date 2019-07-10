@@ -12,5 +12,7 @@ public interface ShoppingCartService {
 	void addProductToCart(ProductEntity product);
 	
 	void removeProductFromCart(String productName, RemoveOption option);
+	
+	boolean isEmpty();
 
 }

@@ -10,6 +10,6 @@ public final class NavigationNames {
 	
 	public static final String DEFAULT = "default";
 	
-	public static final String STYLESHEET = "vaadin://vaadin7styles_v2.css";
+	public static final String STYLESHEET = "vaadin://vaadin7styles_v5.css";
 	
 }
