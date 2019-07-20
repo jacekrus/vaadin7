@@ -1,5 +1,6 @@
 package com.example.Vaadin7;
 
+import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 
 import com.example.Vaadin7.service.AuthenticationService;
@@ -21,7 +22,7 @@ public class MainUI extends UI {
 	private static final long serialVersionUID = 483656132564722441L;
 	
 	@Inject
-	private AuthenticationService authSvc;
+	private Instance<AuthenticationService> authSvc;
 	
 	@Inject
 	private CDIViewProvider viewProvider;
@@ -42,7 +43,7 @@ public class MainUI extends UI {
 	
 	private void setUpLoginView(HorizontalLayout mainLayout) {
 		mainLayout.removeAllComponents();
-		LoginView loginView = new LoginView(authSvc, () -> setUpMainView(mainLayout));
+		LoginView loginView = new LoginView(authSvc.get(), () -> setUpMainView(mainLayout));
         mainLayout.addComponent(loginView);
         mainLayout.setComponentAlignment(loginView, Alignment.MIDDLE_CENTER);
 	}

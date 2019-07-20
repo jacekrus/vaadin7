@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.enterprise.context.SessionScoped;
 
 import com.example.Vaadin7.model.ProductEntity;
@@ -22,6 +23,12 @@ public class ShoppingCartBean implements ShoppingCartService, Serializable {
 	@PostConstruct
 	private void init() {
 		productsInCart = new HashMap<>();
+		System.out.println("ShoppingCartBean CREATED");
+	}
+	
+	@PreDestroy
+	private void destructionCallback() {
+		System.out.println("ShoppingCartBean DESTROYED");
 	}
 	
 	@Override

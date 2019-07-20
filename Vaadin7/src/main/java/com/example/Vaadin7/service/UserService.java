@@ -8,6 +8,10 @@ public interface UserService {
 	
 	void addUser(UserEntity userEntity);
 	
+	void removeUser(UserEntity userEntity);
+	
 	List<UserEntity> findAllUsers(); 
-
+	
+	UserEntity findUserByName(String username);
+	
 }

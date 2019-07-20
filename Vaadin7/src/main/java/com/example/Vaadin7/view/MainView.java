@@ -5,6 +5,7 @@ import com.example.Vaadin7.utils.NavigationNames;
 import com.vaadin.cdi.CDIViewProvider;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.server.Page;
+import com.vaadin.server.VaadinService;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
@@ -43,13 +44,16 @@ public class MainView extends CustomComponent {
 		Button shopButton = new Button("Shop", e -> UI.getCurrent().getNavigator().navigateTo(NavigationNames.SHOP_VIEW));
 		shopButton.setDescription("Shop");
 		shopButton.setWidth("100%");
+		Button statisticsButton = new Button("Statistics", e -> UI.getCurrent().getNavigator().navigateTo(NavigationNames.STATISTICS_VIEW));
+		statisticsButton.setDescription("Statistics");
+		statisticsButton.setWidth("100%");
 		Button logoutButton = setUpLogoutButton();
 		
 		VerticalLayout menuButtons = new VerticalLayout();
 		if("admin".equals(getLoggedInUsername())) {
 			menuButtons.addComponent(adminButton);
 		}
-		menuButtons.addComponents(shopButton, logoutButton);
+		menuButtons.addComponents(shopButton, statisticsButton, logoutButton);
 		menuButtons.setSpacing(true);
 		menuButtons.setMargin(true);
 		VerticalLayout menu = new VerticalLayout(title, menuButtons);
@@ -73,11 +77,7 @@ public class MainView extends CustomComponent {
 		logout.setWidth("55px");
 		logout.setHeight("55px");
 		logout.setDescription("Logout");
-		logout.addClickListener(e -> {
-			 VaadinSession.getCurrent().setAttribute("user", null);
-			 Page.getCurrent().setLocation("");
-			 logoutCallback.onLogout();
-		});
+		logout.addClickListener(e -> doLogout());
 		return logout;
 	}
 	
@@ -89,6 +89,13 @@ public class MainView extends CustomComponent {
 	
 	private String getLoggedInUsername() {
 		return VaadinSession.getCurrent().getAttribute("user").toString();
+	}
+	
+	private void doLogout() {
+		 VaadinSession.getCurrent().setAttribute("user", null);
+		 VaadinService.getCurrentRequest().getWrappedSession().invalidate();
+		 Page.getCurrent().setLocation("");
+		 logoutCallback.onLogout();
 	}
 
 }

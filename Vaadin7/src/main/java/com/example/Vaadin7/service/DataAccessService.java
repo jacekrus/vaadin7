@@ -9,6 +9,8 @@ public interface DataAccessService {
 	
 	void persist(Object obj);
 	
+	void remove(Object obj);
+	
 	List<UserEntity> findAllUsers();
 	
 	List<ProductEntity> findAllProducts();
