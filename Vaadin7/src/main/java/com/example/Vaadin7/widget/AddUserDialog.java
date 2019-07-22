@@ -1,6 +1,6 @@
 package com.example.Vaadin7.widget;
 
-import java.util.List;
+import java.util.Collection;
 
 import com.example.Vaadin7.model.UserEntity;
 import com.example.Vaadin7.service.UserService;
@@ -21,9 +21,9 @@ public class AddUserDialog extends Window {
 	
 	private UserService userSvc;
 	
-	private List<UserEntity> users;
+	private Collection<UserEntity> users;
 	
-	public AddUserDialog(UserService userSvc, List<UserEntity> users) {
+	public AddUserDialog(UserService userSvc, Collection<UserEntity> users) {
 		this.userSvc = userSvc;
 		this.users = users;
 		dialogContent = initDialogContent();

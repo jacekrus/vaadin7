@@ -27,8 +27,13 @@ public class AuthenticationBean implements AuthenticationService {
 		}
 	}
 	
+	@Override
+	public String encryptPassword(String password) {
+		return password;
+	}
+	
 	private boolean authenticateUser(String password, UserEntity user) {
 		return user.getPassword().equals(password);
 	}
-	
+
 }

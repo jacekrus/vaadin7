@@ -19,7 +19,7 @@ public class EncryptedAuthenticationBean implements AuthenticationService {
 	
 	@PersistenceContext(unitName = "vaadin7")
 	EntityManager em;
-
+	
 	@Override
 	public boolean login(String userName, String password) {
 		TypedQuery<UserEntity> query = em.createQuery("select ue from UserEntity ue where ue.name = :userName", UserEntity.class).setParameter("userName", userName);
@@ -30,6 +30,11 @@ public class EncryptedAuthenticationBean implements AuthenticationService {
 		catch (NoResultException  nre) {
 			return false;
 		}
+	}
+	
+	@Override
+	public String encryptPassword(String password) {
+		return doEncrypt(password);
 	}
 	
 	private boolean authenticateUser(String password, UserEntity user) {
@@ -47,11 +52,11 @@ public class EncryptedAuthenticationBean implements AuthenticationService {
 	        for(int i=0;i<digested.length;i++){
 	            sb.append(Integer.toHexString(0xff & digested[i]));
 	        }
-	        return sb.toString();
+	        return sb.toString().substring(0, 9);
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
 		return password;
 	}
-
+	
 }
